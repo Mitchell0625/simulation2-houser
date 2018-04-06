@@ -1,0 +1,29 @@
+.wizard-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0px 20px;
+}
+
+.wizard-top h1 {
+  font-weight: 700;
+}
+.wizard-top button {
+  padding: 10px;
+
+  background: #fec2c2;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.wizard-widget {
+  width: 60%;
+  margin: auto;
+  background: #dff8ea;
+  height: 100vh;
+}
+
+input {
+  border: solid #519872 1px;
+  /* color: #fff; */
+}

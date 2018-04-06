@@ -1,0 +1,7 @@
+.App {
+  font-family: "Open Sans", sans-serif;
+  background: #afd4c0;
+  width: 100vw;
+  overflow: scroll;
+  height: 100vh;
+}

@@ -20,10 +20,23 @@
   width: 60%;
   margin: auto;
   background: #dff8ea;
-  height: 100vh;
+  height: 100%;
+  overflow: hidden;
 }
 
 input {
   border: solid #519872 1px;
   /* color: #fff; */
+}
+.next {
+  position: relative;
+  float: right;
+  top: 100px;
+  padding: 10px;
+  background: #3b5249;
+  color: #fff;
+}
+
+.step3-div input {
+  width: 60%;
 }

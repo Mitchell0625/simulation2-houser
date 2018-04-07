@@ -1,11 +1,13 @@
 .dash-container {
   width: 60%;
+  padding-bottom: 20px;
   margin: auto;
   background: #dff8ea;
 }
 .dash-container h1 {
   color: #3b5249;
   font-size: 36px;
+  font-weight: 300;
 }
 
 .dash-top {
@@ -14,4 +16,15 @@
   align-items: center;
   border-bottom: solid black 2px;
   margin: 0px 20px;
+}
+.dash-container h3 {
+  margin-left: 50px;
+  font-weight: 700;
+}
+
+.dash-top button {
+  background: #8aea92;
+  padding: 20px;
+  font-size: 20px;
+  font-weight: 600;
 }

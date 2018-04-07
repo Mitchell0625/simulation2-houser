@@ -41,12 +41,16 @@ class Dashboard extends Component {
     let houses = this.state.houses.map((e, i) => {
       return (
         <House
+          key={e.id}
           id={e.id}
           name={e.name}
           address={e.address}
           city={e.city}
           state={e.state}
           zip={e.zip}
+          image={e.image}
+          mortgage={e.mortgage}
+          rent={e.rent}
           delete={this.deleteHouse}
         />
       );

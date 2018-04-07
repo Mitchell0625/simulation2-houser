@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { addImage } from "../../../ducks/reducer";
 
+import "../Wizard.css";
 class Step2 extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       image: ""
     };
@@ -12,29 +15,44 @@ class Step2 extends Component {
   handleImage(e) {
     this.setState({ image: e.target.value });
   }
-
+  componentDidMount() {
+    this.setState({ image: this.props.image });
+  }
   render() {
+    const { addImage } = this.props;
     return (
-      <div className="step2-div">
+      <div className="step2-div wizard-widget">
         <div className="step2-urlbox">
-          <h4>Image URL</h4>
-          <input
-            type="text"
-            value={this.state.image}
-            onChange={this.handleImage}
-          />
+          <form>
+            <h4>Image URL</h4>
+            <input
+              type="text"
+              value={this.state.image}
+              onChange={this.handleImage}
+            />
+          </form>
         </div>
+
         <div>
           <Link to="/wizard/step1">
-            <button>Previous Step</button>
+            <button onClick={() => addImage(this.state.image)}>
+              Previous Step
+            </button>
           </Link>
           <Link to="/wizard/step3">
-            <button>Next Step</button>
+            <button className="next" onClick={() => addImage(this.state.image)}>
+              Next Step
+            </button>
           </Link>
         </div>
       </div>
     );
   }
 }
-
-export default Step2;
+function mapStateToProps(state) {
+  const { image } = state;
+  return {
+    image
+  };
+}
+export default connect(mapStateToProps, { addImage })(Step2);

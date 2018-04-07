@@ -13,10 +13,11 @@ module.exports = {
 
   addHouse: (req, res) => {
     const dbInstance = req.app.get("db");
-    const { name, address, city, state, zip } = req.body;
+    const { name, address, city, state, zip, image, mortgage, rent } = req.body;
+    console.log(req.body);
 
     dbInstance
-      .add_house([name, address, city, state, zip])
+      .add_house([name, address, city, state, zip, image, mortgage, rent])
       .then(() => {
         res.status(200).json();
       })

@@ -1,13 +1,18 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import axios from "axios";
+import { addMortRent } from "../../../ducks/reducer";
+import { clearFields } from "../../../ducks/reducer";
+
+import "../Wizard.css";
 
 class Step3 extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      mortgage: "",
-      rent: ""
+      mortgage: 0,
+      rent: 0
     };
     this.handleMortgage = this.handleMortgage.bind(this);
     this.handleRent = this.handleRent.bind(this);
@@ -19,30 +24,62 @@ class Step3 extends Component {
   handleRent(e) {
     this.setState({ rent: e.target.value });
   }
-  addHouse(e) {
-    const { name, address, city, state, zip } = this.state;
-    axios.post("/api/house", { name, address, city, state, zip });
+  addHouse() {
+    const { name, address, city, state, zip, image } = this.props;
+    const { mortgage, rent } = this.state;
+    // const { mortgage, rent } = this.state;
+    axios.post("/api/house", {
+      name,
+      address,
+      city,
+      state,
+      zip,
+      image,
+      mortgage,
+      rent
+    });
+  }
+
+  handleMortgage(e) {
+    this.setState({ mortgage: e.target.value });
+  }
+
+  handleRent(e) {
+    this.setState({ rent: e.target.value });
+  }
+
+  componentDidMount() {
+    this.setState({ mortgage: this.props.mortgage, rent: this.props.rent });
   }
   render() {
+    console.log(this.props);
     return (
       <div>
-        <div>
+        <div className="step3-div wizard-widget">
           <h5>Recommended Rent: $0</h5>
-          <h4>Monthly Mortgage Amount</h4>
-          <input
-            type="text"
-            value={this.state.mortgage}
-            onChange={this.handleMortgage}
-          />
-          <h4>Desired Monthly Rent</h4>
-          <input
-            type="text"
-            value={this.state.rent}
-            onChange={this.handleRent}
-          />
+          <form>
+            <h4>Monthly Mortgage Amount</h4>
+            <input
+              type="text"
+              name="mortgage"
+              value={this.state.mortgage}
+              onChange={this.handleMortgage}
+            />
+            <h4>Desired Monthly Rent</h4>
+            <input
+              type="text"
+              name="rent"
+              value={this.state.rent}
+              onChange={this.handleRent}
+            />
+          </form>
         </div>
-        <Link to="/wizard/step1">
-          <button>Previous Step</button>
+        <Link to="/wizard/step2">
+          <button
+            onClick={() => addMortRent(this.state.mortgage, this.state.rent)}
+          >
+            Previous Step
+          </button>
         </Link>
         <Link to="/">
           <button
@@ -57,5 +94,7 @@ class Step3 extends Component {
     );
   }
 }
-
-export default Step3;
+function mapStateToProps(state) {
+  return state;
+}
+export default connect(mapStateToProps, { addMortRent, clearFields })(Step3);
